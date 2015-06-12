@@ -26,9 +26,9 @@ function getConnection() {
 }
 
 function getUsuarios() {
-    $stmt = getConnection()->query("SELECT * FROM public.'Usuarios'");
+    $stmt = getConnection()->query("SELECT * FROM Usuarios");
     $usuarios = $stmt->fetchAll(PDO::FETCH_OBJ);
-    echo "{usuaios:".json_encode($usuarios)."}";
+    echo "{usuarios:".json_encode($usuarios)."}";
 }
 
 
