@@ -1,22 +1,15 @@
 <?php
-
 require('../vendor/autoload.php');
+$app = new \Slim\Slim();
 
-$app = new Silex\Application();
-$app['debug'] = true;
+$app->get('/', function () {
+    echo "Oi, o sistema está funcionando como esperado!";
+});
 
-// Register the monolog logging service
-$app->register(new Silex\Provider\MonologServiceProvider(), array(
-  'monolog.logfile' => 'php://stderr',
-));
-
-// Our web handlers
-
-$app->get('/', function() use($app) {
-  $app['monolog']->addDebug('logging output.');
-  return 'Hello';
+$app->get('/:name', function ($name) {
+    echo "Oi $name, o sistema está funcionando como esperado!";
 });
 
 $app->run();
-
 ?>
+

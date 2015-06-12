@@ -1,7 +1,6 @@
 {
   "require" : {
-    "silex/silex": "~1.1",
-    "monolog/monolog": "~1.7"
+    "slim/slim": "^2.6"
   },
   "require-dev": {
     "heroku/heroku-buildpack-php": "*"
