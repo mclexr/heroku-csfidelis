@@ -16,12 +16,11 @@ $app->get('/base/usuarios', 'getUsuarios');
 $app->run();
 
 function getConnection() {
-    $dbopts = parse_url(getenv('DATABASE_URL'));
-    $dbhost= $dbopts["host"];
-    $dbuser= $dbopts["user"];
-    $dbpass= $dbopts["pass"];
-    $dbname=ltrim($dbopts["path"],'/');
-    $dbConnection = new PDO("pgsql:dbname=$dbhost;dbname=$dbname", $dbuser, $dbpass); 
+    $dbhost= "ec2-54-163-238-169.compute-1.amazonaws.com";
+    $dbuser= "anvvejvdyuqesa";
+    $dbpass= "F4uqeo2nicDkdba1LAvZAhZ2Db";
+    $dbname= "df9kukvtna79bp";
+    $dbConnection = new PDO("pgsql:host=$dbhost;port=5432;dbname=$dbname;user=$dbuser;password=$dbpass"); 
     $dbConnection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     return $dbConnection;
 }
