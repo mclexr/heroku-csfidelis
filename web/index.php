@@ -8,7 +8,7 @@ $app->get('/', function () {
 });
 
 $app->get('/:name', function ($name) {
-    echo "Oi $name, o sistema está funcionando como esperado!";
+    echo "Oi $name, o sistema está funcionando como esperado! =]";
 });
 
 $app->get('/base/usuarios', 'getUsuarios');
@@ -26,7 +26,7 @@ function getConnection() {
 }
 
 function getUsuarios() {
-    $stmt = getConnection()->query("SELECT * FROM public.\"Usuarios\    "");
+    $stmt = getConnection()->query("SELECT * FROM public.\"Usuarios\"");
     $usuarios = $stmt->fetchAll(PDO::FETCH_OBJ);
     echo "{usuarios:".json_encode($usuarios)."}";
 }
