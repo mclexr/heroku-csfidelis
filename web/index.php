@@ -4,7 +4,7 @@ $app = new \Slim\Slim();
 $app->response()->header('Content-Type', 'application/json;charset=utf-8');
 
 $app->get('/', function () {
-    echo "Oi, o sistema está funcionando como esperado!";
+    echo "Oi, o sistema está funcionando como esperado! =]";
 });
 
 $app->get('/:name', function ($name) {
@@ -26,7 +26,7 @@ function getConnection() {
 }
 
 function getUsuarios() {
-    $stmt = getConnection()->query("SELECT * FROM public.\"Usuarios\"");
+    $stmt = getConnection()->query("SELECT * FROM public.\"Usuarios\    "");
     $usuarios = $stmt->fetchAll(PDO::FETCH_OBJ);
     echo "{usuarios:".json_encode($usuarios)."}";
 }
