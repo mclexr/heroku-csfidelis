@@ -11,19 +11,10 @@ $app->get('/:name', function ($name) {
     echo "Oi $name, o sistema está funcionando como esperado! =]";
 });
 
+$app->post('/v0/usuario', 'addUsuario');
 $app->get('/v0/usuario', 'getUsuarios');
 
 $app->run();
-
-function getConnection() {
-    $dbhost= "ec2-54-163-238-169.compute-1.amazonaws.com";
-    $dbuser= "anvvejvdyuqesa";
-    $dbpass= "F4uqeo2nicDkdba1LAvZAhZ2Db";
-    $dbname= "df9kukvtna79bp";
-    $dbConnection = new PDO(getenv('DATABASE_URL')); 
-    $dbConnection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    return $dbConnection;
-}
 
 function getUsuarios() {
     $stmt = getConnection()->query("SELECT * FROM usuario");
@@ -32,4 +23,36 @@ function getUsuarios() {
 }
 
 
+function addUsuario()
+{
+    $request = \Slim\Slim::getInstance()->request();
+    $usuario = json_decode($request->getBody());
+    $sql = "INSERT INTO usuario (nome,email,senha) VALUES (:nome,:email, :senha)";
+    $conn = getConnection();
+    $stmt = $conn->prepare($sql);
+    $stmt->bindParam("nome",$usuario->nome);
+    $stmt->bindParam("email",$usuario->email);
+    $stmt->bindParam("senha",$usuario->senha);
+    $stmt->execute();
+    $usuario->id = $conn->lastInsertId();
+    echo json_encode($usuario);
+}
+
+
+
+
+
+
+
+
+
+function getConnection() {
+    $dbhost= "ec2-54-163-238-169.compute-1.amazonaws.com";
+    $dbuser= "anvvejvdyuqesa";
+    $dbpass= "F4uqeo2nicDkdba1LAvZAhZ2Db";
+    $dbname= "df9kukvtna79bp";
+    $dbConnection = new PDO("pgsql:host=$dbhost;port=5432;dbname=$dbname;user=$dbuser;password=$dbpass"); 
+    $dbConnection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    return $dbConnection;
+}
 ?>
