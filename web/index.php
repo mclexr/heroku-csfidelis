@@ -1,6 +1,10 @@
 <?php
 require('../vendor/autoload.php');
+require 'Slim/Middleware.php';
+require 'Slim/Middleware/HttpBasicAuth.php';
+ 
 $app = new \Slim\Slim();
+$app->add(new \HttpBasicAuth());
 $app->response()->header('Content-Type', 'application/json;charset=utf-8');
 
 $app->get('/', function () {
