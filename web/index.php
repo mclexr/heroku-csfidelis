@@ -23,7 +23,7 @@ function getUsuarios() {
     echo "{usuarios:".json_encode($usuarios)."}";
 }
 
-function getProduto($id) {
+function getUsuario($id) {
     $conn = getConnection();
     $sql = "SELECT * FROM usuario WHERE id=:id";
     $stmt = $conn->prepare($sql);
