@@ -11,7 +11,7 @@ $app->get('/:name', function ($name) {
     echo "Oi $name, o sistema está funcionando como esperado! =]";
 });
 
-$app->get('/v0/usuarios', 'getUsuarios');
+$app->get('/v0/usuario', 'getUsuarios');
 
 $app->run();
 
@@ -20,7 +20,7 @@ function getConnection() {
     $dbuser= "anvvejvdyuqesa";
     $dbpass= "F4uqeo2nicDkdba1LAvZAhZ2Db";
     $dbname= "df9kukvtna79bp";
-    $dbConnection = new PDO("pgsql:host=$dbhost;port=5432;dbname=$dbname;user=$dbuser;password=$dbpass"); 
+    $dbConnection = new PDO(getenv('DATABASE_URL')); 
     $dbConnection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     return $dbConnection;
 }
