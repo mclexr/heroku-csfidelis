@@ -42,7 +42,7 @@ function addUsuario()
     $stmt = $conn->prepare($sql);
     $stmt->bindParam("nome",$usuario->nome);
     $stmt->bindParam("email",$usuario->email);
-    $stmt->bindParam("senha",$usuario->senha);
+    $stmt->bindParam("senha",crypt($usuario->senha));
     $stmt->execute();
     $usuario->id = $conn->lastInsertId();
     echo json_encode($usuario);
