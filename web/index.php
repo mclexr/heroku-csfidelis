@@ -13,6 +13,7 @@ $app->get('/:name', function ($name) {
 
 $app->post('/v0/usuario', 'addUsuario');
 $app->get('/v0/usuario', 'getUsuarios');
+$app->get('/v0/usuario/:id', 'getUsuario');
 
 $app->run();
 
@@ -22,6 +23,15 @@ function getUsuarios() {
     echo "{usuarios:".json_encode($usuarios)."}";
 }
 
+function getProduto($id) {
+    $conn = getConnection();
+    $sql = "SELECT * FROM usuario WHERE id=:id";
+    $stmt = $conn->prepare($sql);
+    $stmt->bindParam("id",$id);
+    $stmt->execute();
+    $usuario = $stmt->fetchObject();
+    echo json_encode($usuario);
+}
 
 function addUsuario()
 {
@@ -37,14 +47,6 @@ function addUsuario()
     $usuario->id = $conn->lastInsertId();
     echo json_encode($usuario);
 }
-
-
-
-
-
-
-
-
 
 function getConnection() {
     $dbhost= "ec2-54-163-238-169.compute-1.amazonaws.com";
