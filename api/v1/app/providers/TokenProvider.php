@@ -33,19 +33,15 @@ class TokenProvider {
     }
 
     public function verificarToken() {
-        //Codifico os headers em json, pois sem isso não consigo acessar o header "Authorization"
-        $headersJson = json_encode(apache_request_headers());
+        $headers = apache_request_headers();
 
-        //Decodifico os headers para objeto
-        $headers = json_decode($headersJson);
-
-        //Cason nao encontre a propriedade "Authorization não continua
-        if(!isset($headers->Authorization)) {
+        //Caso nao encontre o header "Authorization não continua
+        if(!isset($headers["AUTHORIZATION"])) {
             throw new \Exception("Token não informado.", 401);
         }
 
         //Retiro a palavra Bearer do header
-        $token = str_replace(array("Bearer", " "), "", apache_request_headers()['AUTHORIZATION']);
+        $token = str_replace(array("Bearer", " "), "", $headers["AUTHORIZATION"]);
 
         //Verifico o token
         $decoded = \JWT::decode($token, self::KEY, array('HS256'));
