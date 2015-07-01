@@ -40,7 +40,7 @@ $app->map('/', function() use($app){
                   "Protocolo" => $app->request->getScheme(),
                   "Envio: " => $app->request->getBody()
     );
-    $app->response->setBody("{\"csfidelis\":" . json_encode($info, JSON_PRETTY_PRINT) . "}");
+    $app->response->setBody("{\"CSFidelis\":" . json_encode($info, JSON_PRETTY_PRINT) . "}");
 })->via('ANY');
 
 
