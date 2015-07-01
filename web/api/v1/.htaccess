@@ -1,4 +1,4 @@
 RewriteEngine On
-RewriteBase /csfidelis.com.br/api/v1/
+RewriteBase /csfidelis.com.br/
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteRule ^ index.php [QSA,L]
