@@ -34,9 +34,9 @@ $app->add(new RequestMiddleware());
 
 $app->map('/', function() use($app){
     $headers = apache_request_headers();
-    echo($headers["authorization"])."\n\n";
-    echo($headers["AUTHORIZATION"])."\n\n";
-    echo($headers["Authorization"])."\n\n";
+    echo "authorization". $headers["authorization"] ."\n\n";
+    echo "AUTHORIZATION". $headers["AUTHORIZATION"] ."\n\n";
+    echo "Authorization". $headers["Authorization"] ."\n\n";
     
 })->via('ANY');
 
