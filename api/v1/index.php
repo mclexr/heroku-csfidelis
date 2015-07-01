@@ -20,11 +20,6 @@ $logger = new MonologWriter(array(
         new StreamHandler("app/logs/".date('Y-m-d').".log"),
 )));
 
-$app->map('/', function() use($app){
-    $headers = json_encode(apache_request_headers());
-    $app->response->setBody("{\"headers\":" . json_encode($headers,JSON_PRETTY_PRINT) . "}");
-})->via('ANY');
-
 $app = new \Slim\Slim();
 $app->config('debug', false);
 
@@ -36,6 +31,13 @@ $app->log->setLevel(\Slim\Log::WARN);
 $app->add(new HeaderMiddleware());
 $app->add(new TokenMiddleware());
 $app->add(new RequestMiddleware());
+
+$app->map('/', function() use($app){
+    $headers = json_encode(apache_request_headers());
+    $app->response->setBody("{\"headers\":" . json_encode($headers,JSON_PRETTY_PRINT) . "}");
+})->via('ANY');
+
+
 
 //Error handlers ================================================
 $app->hook('errorHandler', function ($e) use ($app) {
