@@ -1,14 +1,18 @@
 <?php
 require_once "../../../vendor/autoload.php";
 
-//ini_set('display_errors',1);
-//ini_set('display_startup_erros',1);
-//error_reporting(E_ALL);
+ini_set('display_errors',1);
+ini_set('display_startup_erros',1);
+error_reporting(E_ALL);
 
 //Imports =======================================================
 use Flynsarmy\SlimMonolog\Log\MonologWriter;
 use Monolog\Handler\StreamHandler;
 use App\Helper\Utils;
+
+use App\Middleware\HeaderMiddleware;
+use App\Middleware\TokenMiddleware;
+use App\Middleware\RequestMiddleware;
 
 //Configs =======================================================
 $logger = new MonologWriter(array(
@@ -24,9 +28,9 @@ $app->log->setWriter($logger);
 $app->log->setLevel(\Slim\Log::WARN);
 
 
-$app->add(new \App\Middleware\HeaderMiddleware());
-$app->add(new \App\Middleware\TokenMiddleware());
-$app->add(new \App\Middleware\RequestMiddleware());
+$app->add(new HeaderMiddleware());
+$app->add(new TokenMiddleware());
+$app->add(new RequestMiddleware());
 
 //Error handlers ================================================
 $app->hook('errorHandler', function ($e) use ($app) {
