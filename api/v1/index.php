@@ -33,8 +33,11 @@ $app->add(new TokenMiddleware());
 $app->add(new RequestMiddleware());
 
 $app->map('/', function() use($app){
-    $headers = json_encode(apache_request_headers());
-    $app->response->setBody("{\"headers\":" . json_encode($headers,JSON_PRETTY_PRINT) . "}");
+    $headers = apache_request_headers();
+    echo($headers["authorization"])."\n\n";
+    echo($headers["AUTHORIZATION"])."\n\n";
+    echo($headers["Authorization"])."\n\n";
+    
 })->via('ANY');
 
 
