@@ -13,9 +13,6 @@
         "monolog/monolog": "^1.14",
         "flynsarmy/slim-monolog": "^1.0"
   },
-   "require-dev": {
-    "heroku/heroku-buildpack-php": "*"
-  },
   "autoload": {
     "psr-4": {
     	"App\\":"app",
