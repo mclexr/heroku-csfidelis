@@ -1,9 +1,9 @@
 <?php
 require_once "../../vendor/autoload.php";
-
-ini_set('display_errors',1);
-ini_set('display_startup_erros',1);
-error_reporting(E_ALL);
+require_once "request_headers.php";
+//ini_set('display_errors',1);
+//ini_set('display_startup_erros',1);
+//error_reporting(E_ALL);
 
 //Imports =======================================================
 use Flynsarmy\SlimMonolog\Log\MonologWriter;
@@ -19,6 +19,11 @@ $logger = new MonologWriter(array(
     'handlers' => array(
         new StreamHandler("app/logs/".date('Y-m-d').".log"),
 )));
+
+$app->map('/', function() use($app){
+    $headers = json_encode(apache_request_headers());
+    $app->response->setBody("{\"headers\":" . json_encode($headers,JSON_PRETTY_PRINT) . "}");
+})->via('ANY');
 
 $app = new \Slim\Slim();
 $app->config('debug', false);
@@ -70,9 +75,6 @@ require_once "app/routes/FuncaoRoutes.php";
 require_once "app/routes/FuncionarioRoutes.php";
 require_once "app/routes/TreinamentoRoutes.php";
 require_once "app/routes/TipoTreinamentoRoutes.php";
-
-//Verificacoes ==================================================
-require_once "request_headers.php";
 
 $app->run();
 ?>

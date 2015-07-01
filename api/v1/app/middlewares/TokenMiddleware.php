@@ -8,7 +8,8 @@ class TokenMiddleware extends \Slim\Middleware
 
     public function call()
     {
-        $publicRoutes = array("/auth",
+        $publicRoutes = array("/",
+                              "/auth",
                               "/recoverPassword");
 
         $route = $this->app->request()->getPathInfo();
