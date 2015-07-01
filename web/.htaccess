@@ -1,4 +1,4 @@
 RewriteEngine On
-RewriteBase /csfidelis.com.br/
+RewriteBase /csfidelis.herokuapp.com/
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteRule ^ index.php [QSA,L]

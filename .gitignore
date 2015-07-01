@@ -3,3 +3,4 @@ vendor/
 /exec.sh
 /query/
 /web/api/v1/tables.sql
+/web/.htaccess
