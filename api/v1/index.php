@@ -33,10 +33,14 @@ $app->add(new TokenMiddleware());
 $app->add(new RequestMiddleware());
 
 $app->map('/', function() use($app){
-    $headers = apache_request_headers();
-    
-    echo "AUTHORIZATION ". $headers["AUTHORIZATION"] ."\n\n";
-    
+    $info = array("Ip" => $app->request->getIp(),
+                  "Método" => $app->request->getMethod(),
+                  "Agente" => $app->request->getUserAgent(),
+                  "URL" => $app->request->getUrl(),
+                  "Protocolo" => $app->request->getScheme(),
+                  "Envio: " => $app->request->getBody()
+    );
+    $app->response->setBody("{\"csfidelis\":" . json_encode($info, JSON_PRETTY_PRINT) . "}");
 })->via('ANY');
 
 
