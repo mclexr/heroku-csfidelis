@@ -19,11 +19,11 @@
   "autoload": {
     "psr-4": {
     	"App\\":"app",
-        "App\\Model\\":"api/v1/app/models",
-        "App\\Provider\\":"api/v1/app/providers",
-        "App\\Controller\\":"api/v1/app/controllers",
-        "App\\Middleware\\":"api/v1/app/middlewares",
-        "App\\Helper\\": "api/v1/app/helpers"
+        "App\\Model\\":"app/models",
+        "App\\Provider\\":"app/providers",
+        "App\\Controller\\":"app/controllers",
+        "App\\Middleware\\":"app/middlewares",
+        "App\\Helper\\": "app/helpers"
     }
 }
 }
