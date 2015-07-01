@@ -45,7 +45,7 @@ class TokenProvider {
         }
 
         //Retiro a palavra Bearer do header
-        $token = str_replace(array("Bearer", " "), "", $headers->Authorization);
+        $token = str_replace(array("Bearer", " "), "", ($headers->Authorization | $headers->AUTHORIZATION));
 
         //Verifico o token
         $decoded = \JWT::decode($token, self::KEY, array('HS256'));
