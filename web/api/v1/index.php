@@ -23,9 +23,9 @@ $app->log->setEnabled(true);
 $app->log->setWriter($logger);
 $app->log->setLevel(\Slim\Log::WARN);
 
-$app->add(new App\Middleware\HeaderMiddleware());
-$app->add(new App\Middleware\TokenMiddleware());
-$app->add(new App\Middleware\RequestMiddleware());
+$app->add(new \App\Middleware\HeaderMiddleware());
+$app->add(new \App\Middleware\TokenMiddleware());
+$app->add(new \App\Middleware\RequestMiddleware());
 
 //Error handlers ================================================
 $app->hook('errorHandler', function ($e) use ($app) {
