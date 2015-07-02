@@ -22,7 +22,7 @@ class TokenProvider {
         $usuario = $this->entityManager
         ->getRepository("App\Model\Usuario")
         ->findOneBy(array('email' => $email));
-
+ 
         if(!isset($usuario)) {
             throw new \Exception("Problemas na autenticação.", 401);
         }
