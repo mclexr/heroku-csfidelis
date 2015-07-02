@@ -22,10 +22,7 @@ class DoctrineProvider {
     );
 
     $isDevMode = true;
-    // configurações de conexão. Coloque aqui os seus dados
-
-    $dbopts = parse_url(getenv('DATABASE_URL'));
-
+    
     $baseParams = array(
         'driver' => 'pdo_pgsql',
         'host' => 'ec2-54-163-238-169.compute-1.amazonaws.com',

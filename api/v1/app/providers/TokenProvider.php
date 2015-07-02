@@ -6,11 +6,12 @@ namespace App\Provider;
 
 class TokenProvider {
 
-    const KEY = "Familia#Amigos@Master!";
+    private $tokenKey;
     private $entityManager;
 
 	public function __construct() {
         $this->entityManager = DoctrineProvider::getEntityManager();
+        $this->tokenKey = getenv("TOKEN_KEY");
     }
 
     public function getToken($email, $password) {
@@ -44,7 +45,7 @@ class TokenProvider {
         $token = str_replace(array("Bearer", " "), "", $headers["AUTHORIZATION"]);
 
         //Verifico o token
-        $decoded = \JWT::decode($token, self::KEY, array('HS256'));
+        $decoded = \JWT::decode($token,  $this->tokenKey, array('HS256'));
         return $this->tokenResponse($token, $decoded->exp);
 
     }
@@ -56,7 +57,7 @@ class TokenProvider {
             "exp" => $dataToken + 10800,
             "aud" => "http://csfidelis.com.br/api/v1/auth/verify",
         );
-        $tokenCode = \JWT::encode($token, self::KEY);
+        $tokenCode = \JWT::encode($token,  $this->tokenKey);
 
         return $this->tokenResponse($tokenCode, $token["exp"]);
     }
